@@ -1,0 +1,5 @@
+db.sqlite3
+mysite.log
+**/migrations/*.py
+**/migrations/*.pyc
+!**/migrations/__init__.py
