@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>PhotoFolio Bootstrap Template - Index</title>
+  <title>TravelNest</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -108,7 +108,18 @@
         </div>
         {% endfor %}
       </div>
+      {% block Flight %}
+      {% endblock %}
     </section>
+    <br>
+    <br>
+    <div>
+      <form action="{% url 'home' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-danger">Submit<button>
+      </form>
+    </div>
 
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">

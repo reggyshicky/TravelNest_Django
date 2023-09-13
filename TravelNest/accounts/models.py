@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User, auth
 # Create your models here.
 
 class Airport(models.Model):
@@ -16,8 +16,8 @@ FLIGHT_STATUS =[
 ]   
 class BaseModel(models.Model):
     
-    arrivalTime = models.DateTimeField(auto_now_add=True)
-    departureTime = models.DateTimeField(auto_now_add=True)
+    arrivalTime = models.TimeField()
+    departureTime = models.TimeField()
     duration = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places =2)
     status = models.CharField(choices=FLIGHT_STATUS, max_length=10, blank=True, null=True)
@@ -40,3 +40,8 @@ class Train(BaseModel):
     destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="Train_destination")
     def __str__(self):
         return f"{self.duration}, {self.price} {self.status}"
+    
+class Passenger(models.Model):
+    passenger = models.ForeignKey(User, on_delete=models.CASCADE)
+    flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
+    

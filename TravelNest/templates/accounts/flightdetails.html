@@ -1,0 +1,13 @@
+{% extends "accounts/index.html" %}
+{% block Flight %}
+<h2>Flight Details<h2>
+<ul>
+    <li>Departure: {{ flight.pointOfDeparture.name }}</li>
+    <li>Destination: {{ flight.destination.name }}</li>
+    <li>Duration: {{ flight.duration }}</li>
+    <li>Price: {{ flight.price }}</li>
+    <li>Arrival Time: {{ flight.arrivalTime }}</li>
+    <li>Departure Time: {{ flight.departureTime }}</li>  
+</ul>
+
+{% endblock %}
