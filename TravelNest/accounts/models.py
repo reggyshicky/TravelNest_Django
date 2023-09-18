@@ -24,16 +24,21 @@ class BaseModel(models.Model):
     class Meta:
         abstract=True   # no class called BaseModel will be creating in the database
 
+class Passenger(models.Model):
+    first_name = models.CharField(max_length=100, default="pass")
+    last_name = models.CharField(max_length=150, default="pass")                                           
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
     
 class Flight(BaseModel):
     pointOfDeparture = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="flight_time")
     destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="flight_destination")
-     
+    passengers = models.ManyToManyField(Passenger)
     class Meta:
          ordering = ("pointOfDeparture",)
          
     def __str__(self):
-        return f"{self.pointOfDeparture}, {self.destination}, {self.departureTime}, {self.arrivalTime}"
+        return f"{self.pk} {self.pointOfDeparture}, {self.destination}, {self.departureTime}, {self.arrivalTime}"
     
 class Train(BaseModel):
     pointOfDeparture = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="Train_time")
@@ -41,7 +46,5 @@ class Train(BaseModel):
     def __str__(self):
         return f"{self.duration}, {self.price} {self.status}"
     
-class Passenger(models.Model):
-    passenger = models.ForeignKey(User, on_delete=models.CASCADE)
-    flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
+
     

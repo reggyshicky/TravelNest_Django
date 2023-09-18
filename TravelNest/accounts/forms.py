@@ -12,3 +12,10 @@ class FlightForm(forms.ModelForm):
             "pointOfDeparture",
             "destination"    
         ]
+        
+class BookFlightForm(forms.ModelForm):
+    class Meta:
+        model = Flight
+        fields = [
+            "passengers",
+        ]
