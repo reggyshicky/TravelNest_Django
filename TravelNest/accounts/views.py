@@ -32,22 +32,19 @@ def flightdetails(request, pk):
     passengers_in_flight = flight.passengers.all()  
     all_passengers = Passenger.objects.all()
     psgNotInFlight = all_passengers.exclude(pk__in=passengers_in_flight.values_list('pk', flat=True)) #second pk, is pk for passenger instance.
-    
+   
     
     if request.method == "POST":
-        form = BookFlightForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("flightdetails", pk=flight.pk)
-        else:
-            return render(request, "accounts/flightdetails.html", {"form": form, "flight": flight})     
-    else:
-        form = BookFlightForm()
-
+        passenger_pk = request.POST["passenger_name"]
+        passenger = Passenger.objects.get(pk=passenger_pk)
+        print(passenger)
+        flight.passengers.add(passenger)
+        
+        return redirect("flightdetails", pk)
     context = {
         "flight": flight,
         "psgNotInFlight": psgNotInFlight,
-        "form": form
+        "passengers_in_flight": passengers_in_flight,
     }
 
     return render(request, "accounts/flightdetails.html", context)

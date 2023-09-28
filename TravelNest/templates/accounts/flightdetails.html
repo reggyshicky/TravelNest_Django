@@ -14,6 +14,20 @@
                     <li>Arrival Time: {{ flight.arrivalTime }}</li>
                     <li>Departure Time: {{ flight.departureTime }}</li>  
                 </ul>
+                <div class="p-5">
+                    <ul>
+                        <h3>Passengers In Flight</h3>
+                        {% for passenger in passengers_in_flight %}
+                        <li>
+                            {{ passenger.first_name }} {{ passenger.last_name }}
+                        </li>
+                        {% empty %}
+                        <li>
+                            No Passengers
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
                 <div>
                     <form action="{% url 'flightdetails' pk=flight.pk %}" method="POST">
                     {% csrf_token %}

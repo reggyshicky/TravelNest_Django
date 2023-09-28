@@ -33,7 +33,7 @@ class Passenger(models.Model):
 class Flight(BaseModel):
     pointOfDeparture = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="flight_time")
     destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="flight_destination")
-    passengers = models.ManyToManyField(Passenger)
+    passengers = models.ManyToManyField(Passenger, blank=True)
     class Meta:
          ordering = ("pointOfDeparture",)
          
